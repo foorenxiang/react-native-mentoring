@@ -1,15 +1,21 @@
+if (__DEV__) {
+  import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+import Reactotron from 'reactotron-react-native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { registerRootComponent } from 'expo';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
+const App = () => (
+  <>
+    {__DEV__ && Reactotron.log('hello rendering world')}
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
     </View>
-  );
-}
+  </>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -19,3 +25,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+registerRootComponent(App);
