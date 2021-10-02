@@ -1,9 +1,7 @@
 import { ADD_TASK } from './types';
-import { logs } from './initData';
 
 const initialState = {
   tasks: [{ task: 'Sample task', done: true, id: '0' }],
-  logs,
 };
 
 const taskReducer = (state = initialState, action) => {
