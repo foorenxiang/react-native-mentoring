@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 if (__DEV__) {
   import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));
 }
@@ -9,6 +10,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const App = () => (
   <>
+    {/* eslint-disable-next-line no-undef */}
     {__DEV__ && Reactotron.log('hello rendering world')}
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
