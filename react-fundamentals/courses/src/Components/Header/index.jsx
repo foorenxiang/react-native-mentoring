@@ -12,10 +12,12 @@ const LogoutButton = () => (
   </button>
 );
 
-export default () => (
+const Header = () => (
   <header id="box">
     <Logo />
     <Username />
     <LogoutButton />
   </header>
 );
+
+export default Header;
