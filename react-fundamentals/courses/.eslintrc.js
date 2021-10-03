@@ -24,5 +24,6 @@ module.exports = {
     'react/jsx-curly-newline': 'off',
     'object-curly-newline': 'off',
     'arrow-body-style': 'off',
+    'operator-linebreak': 'off',
   },
 };

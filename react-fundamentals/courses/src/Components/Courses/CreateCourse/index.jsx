@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
-const updateCourse = () => {};
-
 const Title = ({ title, titleHandler }) => (
   <>
     <div>Title</div>
@@ -10,8 +8,8 @@ const Title = ({ title, titleHandler }) => (
   </>
 );
 
-const UpdateCourseButton = () => (
-  <button type="submit" onMouseDown={updateCourse}>
+const UpdateCourseButton = ({ updateCourse }) => (
+  <button type="button" onMouseDown={updateCourse}>
     Update course
   </button>
 );
@@ -31,7 +29,9 @@ const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => {
   const [authorInput, setAuthorInput] = useState('');
   const addAuthor = () => {
     const validateInput = () =>
-      authorInput && typeof authorInput === 'string' && !allAuthors.includes(authorInput);
+      typeof authorInput === 'string' &&
+      authorInput.length >= 2 &&
+      !allAuthors.includes(authorInput);
 
     if (validateInput()) {
       setAllAuthors([...allAuthors, authorInput]);
@@ -152,7 +152,7 @@ const CreateCourse = () => {
   return (
     <div>
       <Title titleHandler={titleHandler} title={title} />
-      <UpdateCourseButton submitFormHandler={submitFormHandler} />
+      <UpdateCourseButton updateCourse={submitFormHandler} />
       <Description description={description} setDescription={setDescription} />
       <MetadataContainer metadata={metadata} setMetadata={setMetadata} />
     </div>
