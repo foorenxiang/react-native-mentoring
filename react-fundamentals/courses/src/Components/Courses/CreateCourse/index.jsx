@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const updateCourse = () => {};
 
@@ -29,6 +29,15 @@ const Description = ({ description, setDescription }) => (
 
 const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => {
   const [authorInput, setAuthorInput] = useState('');
+  const addAuthor = () => {
+    const validateInput = () =>
+      authorInput && typeof authorInput === 'string' && !allAuthors.includes(authorInput);
+
+    if (validateInput()) {
+      setAllAuthors([...allAuthors, authorInput]);
+    }
+    setAuthorInput('');
+  };
   return (
     <>
       <div>Add authors</div>
@@ -37,36 +46,39 @@ const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => {
         onChange={({ target: { value } }) => setAuthorInput(value)}
         value={authorInput}
       />
-      <button type="button" onMouseDown={() => setAllAuthors([...allAuthors, authorInput])}>
+      <button type="button" onMouseDown={addAuthor}>
         Create Author
       </button>
     </>
   );
 };
 
-const Duration = ({ duration, setDuration }) => (
-  <>
-    <div>Duration</div>
-    <input
-      type="text"
-      onBlur={({ target: { value: durationValue } }) => {
-        if (parseInt(durationValue, 10)) {
-          setDuration(durationValue);
-        }
-      }}
-    />
-    <div>Duration: {duration} hours</div>
-  </>
-);
+const Duration = ({ duration, setDuration }) => {
+  const minInHours = 60;
+  return (
+    <>
+      <div>Duration</div>
+      <input
+        type="text"
+        onBlur={({ target: { value: durationValue } }) => {
+          if (parseFloat(durationValue, 10)) {
+            setDuration(durationValue / minInHours);
+          }
+        }}
+      />
+      <div>Duration: {duration} hour</div>
+    </>
+  );
+};
 
 const AuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
   <>
     <div>Authors</div>
     {allAuthors
-      .filter((author) => !!courseAuthors.indexOf(author))
+      .filter((author) => !courseAuthors.includes(author))
       .map((author) => (
         <div>
-          <div>{author}</div>
+          <span>{author}</span>
           <button type="button" onMouseDown={() => setCourseAuthors([...courseAuthors, author])}>
             Add author
           </button>
@@ -79,14 +91,14 @@ const CourseAuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCou
   <>
     <div>Course Authors</div>
     {allAuthors
-      .filter((author) => !!courseAuthors.indexOf(author))
+      .filter((author) => courseAuthors.includes(author))
       .map((author) => (
         <>
           <span>{author}</span>
           <button
             type="button"
             onMouseDown={() =>
-              setCourseAuthors(allAuthors.filter((authorInList) => authorInList !== author))
+              setCourseAuthors(courseAuthors.filter((authorInList) => authorInList !== author))
             }
           >
             Delete author

@@ -23,5 +23,6 @@ module.exports = {
     'comma-dangle': 'off',
     'react/jsx-curly-newline': 'off',
     'object-curly-newline': 'off',
+    'arrow-body-style': 'off',
   },
 };
