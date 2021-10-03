@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 
 const updateCourse = () => {};
 
-const Title = () => (
+const Title = ({ title, titleHandler }) => (
   <>
     <div>Title</div>
-    <input type="text" />
+    <input type="text" onChange={titleHandler} value={title} />
   </>
 );
 
@@ -16,25 +16,33 @@ const UpdateCourseButton = () => (
   </button>
 );
 
-const Description = ({ setDescription }) => (
+const Description = ({ description, setDescription }) => (
   <>
     <div>Description</div>
-    <input type="text" onChange={({ target: { value } }) => setDescription(value)} />
+    <input
+      type="text"
+      onChange={({ target: { value } }) => setDescription(value)}
+      value={description}
+    />
   </>
 );
 
-const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => (
-  <>
-    <div>Add authors</div>
-    <input type="text" />
-    <button
-      type="button"
-      onMouseDown={({ target: { value } }) => setAllAuthors([allAuthors, ...value])}
-    >
-      Create Author
-    </button>
-  </>
-);
+const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => {
+  const [authorInput, setAuthorInput] = useState('');
+  return (
+    <>
+      <div>Add authors</div>
+      <input
+        type="text"
+        onChange={({ target: { value } }) => setAuthorInput(value)}
+        value={authorInput}
+      />
+      <button type="button" onMouseDown={() => setAllAuthors([...allAuthors, authorInput])}>
+        Create Author
+      </button>
+    </>
+  );
+};
 
 const Duration = ({ duration, setDuration }) => (
   <>
@@ -42,30 +50,32 @@ const Duration = ({ duration, setDuration }) => (
     <input
       type="text"
       onBlur={({ target: { value: durationValue } }) => {
-        setDuration(durationValue);
+        if (parseInt(durationValue, 10)) {
+          setDuration(durationValue);
+        }
       }}
     />
     <div>Duration: {duration} hours</div>
   </>
 );
 
-const Author = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
+const AuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
   <>
     <div>Authors</div>
     {allAuthors
       .filter((author) => !!courseAuthors.indexOf(author))
       .map((author) => (
-        <>
-          <span>{author}</span>
+        <div>
+          <div>{author}</div>
           <button type="button" onMouseDown={() => setCourseAuthors([...courseAuthors, author])}>
             Add author
           </button>
-        </>
+        </div>
       ))}
   </>
 );
 
-const CourseAuthors = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
+const CourseAuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
   <>
     <div>Course Authors</div>
     {allAuthors
@@ -88,15 +98,16 @@ const CourseAuthors = ({ authorHandlers: { allAuthors, courseAuthors, setCourseA
 
 const AuthorHandler = ({ authorHandlers }) => (
   <>
-    <Author authorHandlers={authorHandlers} />
-    <CourseAuthors authorHandlers={authorHandlers} />
+    <AuthorsView authorHandlers={authorHandlers} />
+    <CourseAuthorsView authorHandlers={authorHandlers} />
   </>
 );
 
-const MetadataContainer = () => {
+const MetadataContainer = ({ metadata, setMetadata }) => {
   const [duration, setDuration] = useState(0);
   const [allAuthors, setAllAuthors] = useState([]);
   const [courseAuthors, setCourseAuthors] = useState([]);
+
   return (
     <>
       <AddAuthor authorsInfo={{ allAuthors, setAllAuthors }} />
@@ -114,7 +125,11 @@ const MetadataContainer = () => {
 
 const CreateCourse = () => {
   const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [metadata, setMetadata] = useState({});
   const formValues = { description };
+
+  const titleHandler = ({ target: { value: newTitle } }) => setTitle(newTitle);
 
   const submitFormHandler = async () => {
     const endpoint = '';
@@ -124,10 +139,10 @@ const CreateCourse = () => {
 
   return (
     <div>
-      <Title />
+      <Title titleHandler={titleHandler} title={title} />
       <UpdateCourseButton submitFormHandler={submitFormHandler} />
       <Description description={description} setDescription={setDescription} />
-      <MetadataContainer />
+      <MetadataContainer metadata={metadata} setMetadata={setMetadata} />
     </div>
   );
 };
