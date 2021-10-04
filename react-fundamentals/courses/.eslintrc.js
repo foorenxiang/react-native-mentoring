@@ -25,5 +25,6 @@ module.exports = {
     'object-curly-newline': 'off',
     'arrow-body-style': 'off',
     'operator-linebreak': 'off',
+    'no-confusing-arrow': 'off',
   },
 };
