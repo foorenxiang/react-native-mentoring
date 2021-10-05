@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import CourseCard from './CourseCard';
 import { mockedCourseList } from './data';
 
@@ -7,10 +9,12 @@ const CourseCards = () =>
     <CourseCard courseData={course} key={`${course.title}_course_card`} />
   ));
 
-const CoursesList = () => (
+const CoursesList = ({ history }) => (
   <div>
     <input type="text" />
-    <button type="button">Add new course</button>
+    <button type="button" onMouseDown={() => history.push('/courses/add')}>
+      Add new course
+    </button>
     <CourseCards />
   </div>
 );

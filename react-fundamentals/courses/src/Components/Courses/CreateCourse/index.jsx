@@ -39,13 +39,13 @@ const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => {
     if (validateInput()) {
       setAllAuthors([...allAuthors, authorInput]);
     }
+    setAuthorInput('');
     if (!mockedAuthorsList.includes(authorInput)) {
       mockedAuthorsList.push({
         id: uuidv4(),
         name: authorInput,
       });
     }
-    setAuthorInput('');
   };
   return (
     <>
@@ -124,16 +124,13 @@ const AuthorHandler = ({ authorHandlers }) => (
   </>
 );
 
-const MetadataContainer = ({ setMetadata }) => {
+const MetadataContainer = ({ setMetadata, resetMetaData }) => {
   const [duration, setDuration] = useState(0);
   const [allAuthors, setAllAuthors] = useState([]);
   const [courseAuthors, setCourseAuthors] = useState([]);
 
   useEffect(() => {
     setMetadata({ duration, allAuthors, courseAuthors });
-    return () => {
-      setMetadata({});
-    };
   }, [duration, allAuthors, courseAuthors]);
 
   return (
@@ -152,14 +149,18 @@ const MetadataContainer = ({ setMetadata }) => {
 };
 
 const CreateCourse = ({ history }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [metadata, setMetadata] = useState({
+  const defaultMetaData = {
     allAuthors: [],
     courseAuthors: [],
     setCourseAuthors: [],
-  });
+  };
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [metadata, setMetadata] = useState(defaultMetaData);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const resetMetaData = () => setMetadata(defaultMetaData);
 
   const getAuthorId = (authorName) =>
     authorName
@@ -172,7 +173,7 @@ const CreateCourse = ({ history }) => {
     description,
     creationDate: 'string',
     duration: metadata.duration,
-    authors: metadata.allAuthors.map((authorName) => getAuthorId(authorName)),
+    authors: metadata?.allAuthors.map((authorName) => getAuthorId(authorName)),
   };
 
   const titleHandler = ({ target: { value: newTitle } }) => setTitle(newTitle);
@@ -194,7 +195,11 @@ const CreateCourse = ({ history }) => {
       <Title titleHandler={titleHandler} title={title} />
       <UpdateCourseButton updateCourse={submitFormHandler} />
       <Description description={description} setDescription={setDescription} />
-      <MetadataContainer metadata={metadata} setMetadata={setMetadata} />
+      <MetadataContainer
+        metadata={metadata}
+        setMetadata={setMetadata}
+        resetMetaData={resetMetaData}
+      />
     </div>
   );
 };
