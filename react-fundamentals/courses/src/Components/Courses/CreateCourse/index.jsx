@@ -69,7 +69,7 @@ const Duration = ({ duration, setDuration }) => {
       <div>Duration</div>
       <input
         type="text"
-        onBlur={({ target: { value: durationValue } }) => {
+        onChange={({ target: { value: durationValue } }) => {
           if (parseFloat(durationValue, 10)) {
             setDuration(durationValue / minInHours);
           }
