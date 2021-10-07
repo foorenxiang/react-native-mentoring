@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { mockedAuthorsList } from '../CoursesList/data';
+import { mockedAuthorsList } from '../data';
 
 const Title = ({ title, titleHandler }) => (
   <>

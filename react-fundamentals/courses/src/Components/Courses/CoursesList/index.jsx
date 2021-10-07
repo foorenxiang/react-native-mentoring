@@ -2,7 +2,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import CourseCard from './CourseCard';
-import { mockedCourseList } from './data';
+import { mockedCourseList } from '../data';
 
 const CourseCards = () =>
   mockedCourseList.map((course) => (

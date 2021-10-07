@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { mockedAuthorsList } from '../data';
+import { mockedAuthorsList } from '../../data';
 import './index.module.css';
 
 const matchAuthorIdToName = (authorId) =>
