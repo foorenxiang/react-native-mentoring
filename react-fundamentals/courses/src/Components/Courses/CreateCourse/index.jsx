@@ -148,7 +148,7 @@ const MetadataContainer = ({ setMetadata, resetMetaData }) => {
   );
 };
 
-const CreateCourse = ({ history }) => {
+const CreateCourse = () => {
   const defaultMetaData = {
     allAuthors: [],
     courseAuthors: [],

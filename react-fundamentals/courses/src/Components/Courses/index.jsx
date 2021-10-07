@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CoursesList from './CoursesList';
-import CreateCourse from './CreateCourse';
 
-const Courses = ({ history }) => {
+const Courses = () => {
   const [courseView, setCourseView] = useState('');
 
   const viewOptions = {
-    courseList: <CoursesList setCourseView={setCourseView} history={history} />,
+    courseList: <CoursesList setCourseView={setCourseView} />,
   };
   Object.freeze(viewOptions);
 
