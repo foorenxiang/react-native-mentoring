@@ -11,7 +11,7 @@ const Registration = () => {
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
   const passwordChangeHandler = ({ target: { value } }) => setPassword(value);
 
-  const submitHandler = async () => {
+  const submitHandler = async ({ preventDefault }) => {
     const postEndpoint = '/register';
     const fetchParams = {
       method: 'POST',
@@ -22,6 +22,7 @@ const Registration = () => {
     // eslint-disable-next-line no-console
     console.log(response);
     history.push('/courses');
+    preventDefault();
   };
 
   return (
@@ -51,7 +52,7 @@ const Registration = () => {
         value={password}
         placeholder="Enter password"
       />
-      <input type="submit" value="Register" onMouseDown={(e) => submitHandler(e)} />
+      <input type="submit" value="Register" onSubmit={(e) => submitHandler(e)} />
       <div id="registrationMessageContainer">
         <span id="registrationMessage">If you have an account you can </span>
         <input

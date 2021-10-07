@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
   const passwordChangeHandler = ({ target: { value } }) => setPassword(value);
-  const submitHandler = async () => {
+  const submitHandler = async ({ preventDefault }) => {
     const postEndpoint = '';
     const fetchParams = {
       method: 'POST',
@@ -18,6 +18,7 @@ const Login = () => {
     // eslint-disable-next-line no-console
     console.log(response);
     history.push('/courses');
+    preventDefault();
   };
   return (
     <>
@@ -34,7 +35,7 @@ const Login = () => {
       <input
         type="password"
         id="passwordField"
-        onChange={(e) => passwordChangeHandler(e)}
+        onSubmit={(e) => passwordChangeHandler(e)}
         value={password}
         placeholder="Enter password"
       />
