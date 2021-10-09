@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { mockedAuthorsList } from '../../data';
-import './index.module.css';
+import React from "react";
+import { mockedAuthorsList } from "../../../../utils/data";
+import "./index.module.css";
 
 const matchAuthorIdToName = (authorId) =>
   mockedAuthorsList.find((mockedAuthor) => mockedAuthor.id === authorId).name;
-const getAuthorNames = (authorsId) => authorsId.map((authorId) => matchAuthorIdToName(authorId));
+const getAuthorNames = (authorsId) =>
+  authorsId.map((authorId) => matchAuthorIdToName(authorId));
 
 const Title = ({ title }) => <div>{title}</div>;
 const Duration = ({ duration }) => <div>{duration} hours</div>;

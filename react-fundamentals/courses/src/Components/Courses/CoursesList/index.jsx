@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import CourseCard from './CourseCard';
-import { mockedCourseList } from '../data';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import CourseCard from "./CourseCard";
+import { mockedCourseList } from "../../../utils/data";
 
 const CourseCards = () =>
   mockedCourseList.map((course) => (
@@ -14,7 +14,7 @@ const CoursesList = () => {
   return (
     <div>
       <input type="text" />
-      <button type="button" onMouseDown={() => history.push('/courses/add')}>
+      <button type="button" onMouseDown={() => history.push("/courses/add")}>
         Add new course
       </button>
       <CourseCards />

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import { mockedAuthorsList } from '../data';
+import React, { useState, useEffect } from "react";
+import { withRouter, Redirect } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import { mockedAuthorsList } from "../../../utils/data";
 
 const Title = ({ title, titleHandler }) => (
   <>
@@ -29,17 +29,17 @@ const Description = ({ description, setDescription }) => (
 );
 
 const AddAuthor = ({ authorsInfo: { setAllAuthors, allAuthors } }) => {
-  const [authorInput, setAuthorInput] = useState('');
+  const [authorInput, setAuthorInput] = useState("");
   const addAuthor = () => {
     const validateInput = () =>
-      typeof authorInput === 'string' &&
+      typeof authorInput === "string" &&
       authorInput.length >= 2 &&
       !allAuthors.includes(authorInput);
 
     if (validateInput()) {
       setAllAuthors([...allAuthors, authorInput]);
     }
-    setAuthorInput('');
+    setAuthorInput("");
     if (!mockedAuthorsList.includes(authorInput)) {
       mockedAuthorsList.push({
         id: uuidv4(),
@@ -80,7 +80,9 @@ const Duration = ({ duration, setDuration }) => {
   );
 };
 
-const AuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
+const AuthorsView = ({
+  authorHandlers: { allAuthors, courseAuthors, setCourseAuthors },
+}) => (
   <>
     <div>Authors</div>
     {allAuthors
@@ -88,7 +90,10 @@ const AuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAut
       .map((author) => (
         <div>
           <span>{author}</span>
-          <button type="button" onMouseDown={() => setCourseAuthors([...courseAuthors, author])}>
+          <button
+            type="button"
+            onMouseDown={() => setCourseAuthors([...courseAuthors, author])}
+          >
             Add author
           </button>
         </div>
@@ -96,7 +101,9 @@ const AuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAut
   </>
 );
 
-const CourseAuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
+const CourseAuthorsView = ({
+  authorHandlers: { allAuthors, courseAuthors, setCourseAuthors },
+}) => (
   <>
     <div>Course Authors</div>
     {allAuthors
@@ -107,7 +114,9 @@ const CourseAuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCou
           <button
             type="button"
             onMouseDown={() =>
-              setCourseAuthors(courseAuthors.filter((authorInList) => authorInList !== author))
+              setCourseAuthors(
+                courseAuthors.filter((authorInList) => authorInList !== author)
+              )
             }
           >
             Delete author
@@ -155,8 +164,8 @@ const CreateCourse = () => {
     setCourseAuthors: [],
   };
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [metadata, setMetadata] = useState(defaultMetaData);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -164,14 +173,16 @@ const CreateCourse = () => {
 
   const getAuthorId = (authorName) =>
     authorName
-      ? mockedAuthorsList.filter((authorObject) => authorObject.name === authorName).id
+      ? mockedAuthorsList.filter(
+          (authorObject) => authorObject.name === authorName
+        ).id
       : null;
 
   const formValues = {
     id: uuidv4(),
     title,
     description,
-    creationDate: 'string',
+    creationDate: "string",
     duration: metadata.duration,
     authors: metadata?.allAuthors.map((authorName) => getAuthorId(authorName)),
   };
@@ -179,8 +190,11 @@ const CreateCourse = () => {
   const titleHandler = ({ target: { value: newTitle } }) => setTitle(newTitle);
 
   const submitFormHandler = async () => {
-    const endpoint = '';
-    const response = await fetch(endpoint, { method: 'POST', body: JSON.stringify(formValues) });
+    const endpoint = "";
+    const response = await fetch(endpoint, {
+      method: "POST",
+      body: JSON.stringify(formValues),
+    });
     // return response.json;
     // eslint-disable-next-line no-constant-condition
     if (true) {
