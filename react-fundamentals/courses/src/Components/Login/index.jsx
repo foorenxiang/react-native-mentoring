@@ -8,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
   const passwordChangeHandler = ({ target: { value } }) => setPassword(value);
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const submitHandler = async ({ preventDefault }) => {
     const postEndpoint = `${backendURL}/login`;
     const fetchParams = {
@@ -15,14 +16,31 @@ const Login = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     };
-    const response = await fetch(postEndpoint, fetchParams);
+    const responseObject = await fetch(postEndpoint, fetchParams);
     // eslint-disable-next-line no-console
-    console.log(response);
-    history.push("/courses");
+    const userToken = (async () => {
+      const response = await JSON.parse(responseObject.json);
+      const success = response?.successful;
+      if (success === true) {
+        setLoginErrorMessage("");
+        localStorage.setItem(JSON.stringify(response?.result));
+        history.push("/courses");
+      }
+      setLoginErrorMessage(response?.result);
+    })();
+    setLoginErrorMessage(true);
     preventDefault();
   };
+
+  const LoginErrorMessage = () => (
+    <div id="loginErrorMessage">
+      <div>Login unsuccessful, please try again</div>
+      <div>`&quot;{loginErrorMessage}&quot;</div>
+    </div>
+  );
   return (
     <>
+      {loginErrorMessage && LoginErrorMessage}
       <div id="loginTitle">Login</div>
       <div id="emailTitle">Email</div>
       <input
