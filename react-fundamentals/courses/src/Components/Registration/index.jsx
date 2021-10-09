@@ -22,7 +22,7 @@ const Registration = () => {
     const response = await fetch(postEndpoint, fetchParams);
     // eslint-disable-next-line no-console
     console.log(response);
-    history.push("/courses");
+    history.push("/login");
     preventDefault();
   };
 
