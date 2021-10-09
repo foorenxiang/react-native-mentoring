@@ -1,12 +1,12 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "./Components";
-import Header from "./Components/Header";
-import Login from "./Components/Login";
-import Registration from "./Components/Registration";
-import Courses from "./Components/Courses";
-import CreateCourse from "./Components/Courses/CreateCourse";
-import SampleCourseInfo from "./Components/Courses/DraftCourseInfo";
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './Components';
+import Header from './Components/Header';
+import Login from './Components/Login';
+import Registration from './Components/Registration';
+import Courses from './Components/Courses';
+import CreateCourse from './Components/Courses/CreateCourse';
+import SampleCourseInfo from './Components/Courses/DraftCourseInfo';
 
 const Routes = () => (
   <BrowserRouter>

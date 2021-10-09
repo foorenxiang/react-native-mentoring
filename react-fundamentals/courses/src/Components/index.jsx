@@ -1,9 +1,9 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 const Home = () => {
   const userToken = (async () => {
-    const userTokenLoaded = await JSON.parse(localStorage.getItem("userToken"));
+    const userTokenLoaded = await JSON.parse(localStorage.getItem('userToken'));
     return userTokenLoaded;
   })();
 

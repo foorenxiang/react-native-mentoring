@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { backendURL } from "../../utils";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { backendURL } from '../../utils';
 
 const Registration = () => {
   const history = useHistory();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const nameChangeHandler = ({ target: { value } }) => setName(value);
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
@@ -15,14 +15,14 @@ const Registration = () => {
   const submitHandler = async ({ preventDefault }) => {
     const postEndpoint = `${backendURL}/register`;
     const fetchParams = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),
     };
     const response = await fetch(postEndpoint, fetchParams);
     // eslint-disable-next-line no-console
     console.log(response);
-    history.push("/login");
+    history.push('/login');
     preventDefault();
   };
 
@@ -53,17 +53,13 @@ const Registration = () => {
         value={password}
         placeholder="Enter password"
       />
-      <input
-        type="submit"
-        value="Register"
-        onSubmit={(e) => submitHandler(e)}
-      />
+      <input type="submit" value="Register" onSubmit={(e) => submitHandler(e)} />
       <div id="registrationMessageContainer">
         <span id="registrationMessage">If you have an account you can </span>
         <input
           type="button"
           id="loginLink"
-          onMouseDown={() => history.push("/login")}
+          onMouseDown={() => history.push('/login')}
           value="Login"
         />
       </div>

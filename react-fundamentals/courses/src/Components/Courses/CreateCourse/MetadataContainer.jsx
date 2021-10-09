@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import AddAuthor from "./AddAuthor";
-import Duration from "./Duration";
-import Authors from "./Authors";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import AddAuthor from './AddAuthor';
+import Duration from './Duration';
+import Authors from './Authors';
 
 const MetadataContainer = ({ setMetadata }) => {
   const [duration, setDuration] = useState(0);

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import CourseCard from "./CourseCard";
-import { backendURL } from "../../../utils";
-import { mockedCourseList } from "../../../utils/data";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import CourseCard from './CourseCard';
+import { backendURL } from '../../../utils';
+import { mockedCourseList } from '../../../utils/data';
 
 const CourseCards = () => {
   const [courseListData, setCourseListData] = useState([]);
@@ -31,7 +31,7 @@ const CoursesList = () => {
   return (
     <div>
       <input type="text" />
-      <button type="button" onMouseDown={() => history.push("/courses/add")}>
+      <button type="button" onMouseDown={() => history.push('/courses/add')}>
         Add new course
       </button>
       <CourseCards />

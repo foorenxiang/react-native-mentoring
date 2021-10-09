@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import UpdateCourseButton from "./UpdateCourseButton";
-import Title from "./Title";
-import Description from "./Description";
-import { mockedAuthorsList } from "../../../utils/data";
-import MetadataContainer from "./MetadataContainer";
-import { backendURL } from "../../../utils";
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import UpdateCourseButton from './UpdateCourseButton';
+import Title from './Title';
+import Description from './Description';
+import { mockedAuthorsList } from '../../../utils/data';
+import MetadataContainer from './MetadataContainer';
+import { backendURL } from '../../../utils';
 
 const CreateCourse = () => {
   const defaultMetaData = {
@@ -16,23 +16,21 @@ const CreateCourse = () => {
     setCourseAuthors: [],
   };
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [metadata, setMetadata] = useState(defaultMetaData);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const getAuthorId = (authorName) =>
     authorName
-      ? mockedAuthorsList.filter(
-          (authorObject) => authorObject.name === authorName
-        ).id
+      ? mockedAuthorsList.filter((authorObject) => authorObject.name === authorName).id
       : null;
 
   const formValues = {
     id: uuidv4(),
     title,
     description,
-    creationDate: "string",
+    creationDate: 'string',
     duration: metadata.duration,
     authors: metadata?.allAuthors.map((authorName) => getAuthorId(authorName)),
   };
@@ -42,7 +40,7 @@ const CreateCourse = () => {
   const submitFormHandler = async () => {
     const endpoint = `${backendURL}/courses/add`;
     const responseObject = await fetch(endpoint, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(formValues),
     });
     const response = await JSON.parse(responseObject.json);

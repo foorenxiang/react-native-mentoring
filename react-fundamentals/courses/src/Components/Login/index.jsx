@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { backendURL } from "../../utils";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { backendURL } from '../../utils';
 
 const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
   const passwordChangeHandler = ({ target: { value } }) => setPassword(value);
-  const [loginErrorMessage, setLoginErrorMessage] = useState("");
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const submitHandler = async ({ preventDefault }) => {
     const postEndpoint = `${backendURL}/login`;
     const fetchParams = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     };
     const responseObject = await fetch(postEndpoint, fetchParams);
@@ -22,9 +22,9 @@ const Login = () => {
       const response = await JSON.parse(responseObject.json);
       const success = response?.successful;
       if (success === true) {
-        setLoginErrorMessage("");
+        setLoginErrorMessage('');
         localStorage.setItem(JSON.stringify(response?.result));
-        history.push("/courses");
+        history.push('/courses');
       }
       setLoginErrorMessage(response?.result);
     })();
@@ -58,19 +58,13 @@ const Login = () => {
         value={password}
         placeholder="Enter password"
       />
-      <input
-        type="submit"
-        value="Login"
-        onMouseDown={(e) => submitHandler(e)}
-      />
+      <input type="submit" value="Login" onMouseDown={(e) => submitHandler(e)} />
       <div id="registrationMessageContainer">
-        <span id="registrationMessage">
-          If you do not have an account you can{" "}
-        </span>
+        <span id="registrationMessage">If you do not have an account you can </span>
         <input
           type="button"
           id="registrationLink"
-          onMouseDown={() => history.push("/registration")}
+          onMouseDown={() => history.push('/registration')}
           value="Register"
         />
       </div>

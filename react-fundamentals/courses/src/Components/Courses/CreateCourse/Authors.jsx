@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const authorHandlersPropTypes = PropTypes.shape({
   allAuthors: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -7,9 +7,7 @@ const authorHandlersPropTypes = PropTypes.shape({
   setCourseAuthors: PropTypes.func.isRequired,
 });
 
-const AuthorsView = ({
-  authorHandlers: { allAuthors, courseAuthors, setCourseAuthors },
-}) => (
+const AuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
   <>
     <div>Authors</div>
     {allAuthors
@@ -17,10 +15,7 @@ const AuthorsView = ({
       .map((author) => (
         <div>
           <span>{author}</span>
-          <button
-            type="button"
-            onMouseDown={() => setCourseAuthors([...courseAuthors, author])}
-          >
+          <button type="button" onMouseDown={() => setCourseAuthors([...courseAuthors, author])}>
             Add author
           </button>
         </div>
@@ -32,9 +27,7 @@ AuthorsView.propTypes = {
   authorHandlers: authorHandlersPropTypes.isRequired,
 };
 
-const CourseAuthorsView = ({
-  authorHandlers: { allAuthors, courseAuthors, setCourseAuthors },
-}) => (
+const CourseAuthorsView = ({ authorHandlers: { allAuthors, courseAuthors, setCourseAuthors } }) => (
   <>
     <div>Course Authors</div>
     {allAuthors
@@ -45,9 +38,7 @@ const CourseAuthorsView = ({
           <button
             type="button"
             onMouseDown={() =>
-              setCourseAuthors(
-                courseAuthors.filter((authorInList) => authorInList !== author)
-              )
+              setCourseAuthors(courseAuthors.filter((authorInList) => authorInList !== author))
             }
           >
             Delete author
