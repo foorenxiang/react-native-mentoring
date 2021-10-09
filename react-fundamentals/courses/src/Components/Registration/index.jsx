@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { backendURL } from "../../utils";
 
 const Registration = () => {
   const history = useHistory();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const nameChangeHandler = ({ target: { value } }) => setName(value);
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
   const passwordChangeHandler = ({ target: { value } }) => setPassword(value);
 
   const submitHandler = async ({ preventDefault }) => {
-    const postEndpoint = '/register';
+    const postEndpoint = `${backendURL}/register`;
     const fetchParams = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
     };
     const response = await fetch(postEndpoint, fetchParams);
     // eslint-disable-next-line no-console
     console.log(response);
-    history.push('/courses');
+    history.push("/courses");
     preventDefault();
   };
 
@@ -62,7 +63,7 @@ const Registration = () => {
         <input
           type="button"
           id="loginLink"
-          onMouseDown={() => history.push('/login')}
+          onMouseDown={() => history.push("/login")}
           value="Login"
         />
       </div>

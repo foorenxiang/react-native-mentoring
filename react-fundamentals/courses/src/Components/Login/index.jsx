@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { backendURL } from "../../utils";
 
 const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const emailChangeHandler = ({ target: { value } }) => setEmail(value);
   const passwordChangeHandler = ({ target: { value } }) => setPassword(value);
   const submitHandler = async ({ preventDefault }) => {
-    const postEndpoint = '';
+    const postEndpoint = `${backendURL}/login`;
     const fetchParams = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     };
     const response = await fetch(postEndpoint, fetchParams);
     // eslint-disable-next-line no-console
     console.log(response);
-    history.push('/courses');
+    history.push("/courses");
     preventDefault();
   };
   return (
@@ -46,12 +47,12 @@ const Login = () => {
       />
       <div id="registrationMessageContainer">
         <span id="registrationMessage">
-          If you do not have an account you can{' '}
+          If you do not have an account you can{" "}
         </span>
         <input
           type="button"
           id="registrationLink"
-          onMouseDown={() => history.push('/registration')}
+          onMouseDown={() => history.push("/registration")}
           value="Register"
         />
       </div>

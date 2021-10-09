@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { mockedAuthorsList } from "../../../utils/data";
+import { backendURL } from "../../../utils";
 
 const Title = ({ title, titleHandler }) => (
   <>
@@ -190,16 +191,17 @@ const CreateCourse = () => {
   const titleHandler = ({ target: { value: newTitle } }) => setTitle(newTitle);
 
   const submitFormHandler = async () => {
-    const endpoint = "";
-    const response = await fetch(endpoint, {
+    const endpoint = `${backendURL}/courses/add`;
+    const responseObject = await fetch(endpoint, {
       method: "POST",
       body: JSON.stringify(formValues),
     });
-    // return response.json;
+    const response = await JSON.parse(responseObject.json);
     // eslint-disable-next-line no-constant-condition
     if (true) {
       setIsSubmitted(true);
     }
+    return response;
   };
 
   return isSubmitted ? (
