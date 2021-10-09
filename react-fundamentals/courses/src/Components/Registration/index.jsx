@@ -52,7 +52,11 @@ const Registration = () => {
         value={password}
         placeholder="Enter password"
       />
-      <input type="submit" value="Register" onSubmit={(e) => submitHandler(e)} />
+      <input
+        type="submit"
+        value="Register"
+        onSubmit={(e) => submitHandler(e)}
+      />
       <div id="registrationMessageContainer">
         <span id="registrationMessage">If you have an account you can </span>
         <input

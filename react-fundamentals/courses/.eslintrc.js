@@ -27,5 +27,7 @@ module.exports = {
     "arrow-body-style": "off",
     "operator-linebreak": "off",
     "no-confusing-arrow": "off",
+    quotes: "off",
+    indent: "off",
   },
 };

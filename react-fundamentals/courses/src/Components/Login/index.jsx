@@ -39,9 +39,15 @@ const Login = () => {
         value={password}
         placeholder="Enter password"
       />
-      <input type="submit" value="Login" onMouseDown={(e) => submitHandler(e)} />
+      <input
+        type="submit"
+        value="Login"
+        onMouseDown={(e) => submitHandler(e)}
+      />
       <div id="registrationMessageContainer">
-        <span id="registrationMessage">If you do not have an account you can </span>
+        <span id="registrationMessage">
+          If you do not have an account you can{' '}
+        </span>
         <input
           type="button"
           id="registrationLink"
