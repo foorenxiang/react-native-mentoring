@@ -2,6 +2,7 @@
 import React from "react";
 import { mockedAuthorsList } from "../../../../utils/data";
 import "./index.module.css";
+import PropTypes from "prop-types";
 
 const matchAuthorIdToName = (authorId) =>
   mockedAuthorsList.find((mockedAuthor) => mockedAuthor.id === authorId).name;
@@ -28,5 +29,26 @@ const CourseCard = ({ courseData: data }) => (
     <Authors authorsId={data.authors} key={`${data.id}_author`} />
   </div>
 );
+CourseCard.propTypes = {
+  courseData: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    creationDate: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
+};
+
+CourseCard.defaultProps = {
+  courseData: {
+    id: null,
+    title: null,
+    duration: null,
+    creationDate: null,
+    description: null,
+    authors: [],
+  },
+};
 
 export default CourseCard;
