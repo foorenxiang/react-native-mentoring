@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import { mockedAuthorsList } from "../../../../utils/data";
 import "./index.module.css";
-import PropTypes from "prop-types";
 
 const matchAuthorIdToName = (authorId) =>
   mockedAuthorsList.find((mockedAuthor) => mockedAuthor.id === authorId).name;
@@ -29,6 +29,7 @@ const CourseCard = ({ courseData: data }) => (
     <Authors authorsId={data.authors} key={`${data.id}_author`} />
   </div>
 );
+
 CourseCard.propTypes = {
   courseData: PropTypes.shape({
     id: PropTypes.string.isRequired,
