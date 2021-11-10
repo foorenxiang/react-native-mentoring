@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Pressable, Text } from "react-native";
+import BackNavigationBar from "../../components/reusable/BackNavigation";
+import pressedStyleBuilder from "../../styles/reusable/pressedStyleBuilder";
 import styles from "../../styles/RegistrationStyles";
 
 const RegistrationScreen = () => {
@@ -10,11 +12,7 @@ const RegistrationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Pressable>
-          <Text>Back</Text>
-        </Pressable>
-      </View>
+      <BackNavigationBar />
       <Text style={styles.titleText}>Ecommerce{"\n"}Store</Text>
       <TextInput
         placeholder="Full Name"
@@ -46,10 +44,14 @@ const RegistrationScreen = () => {
         value={passwordConfirmation}
         style={styles.inputField}
       />
-      <Pressable style={styles.buttonPressable}>
+      <Pressable
+        style={({ pressed }) =>
+          pressedStyleBuilder(pressed, styles.buttonPressable)
+        }
+      >
         <Text style={styles.buttonText}>SIGN UP</Text>
       </Pressable>
-      <Pressable>
+      <Pressable style={({ pressed }) => pressedStyleBuilder(pressed)}>
         <Text style={styles.secondaryButtonText}>
           Already have account? Sign In
         </Text>

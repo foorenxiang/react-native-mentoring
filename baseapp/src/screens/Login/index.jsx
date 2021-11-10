@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
+import pressedStyleBuilder from "../../styles/reusable/pressedStyleBuilder";
 import styles from "../../styles/LoginStyles";
 
 const LoginScreen = () => {
@@ -25,19 +26,27 @@ const LoginScreen = () => {
           value={password}
           style={styles.inputField}
         />
-        <Pressable style={styles.forgotPasswordButtonPressable}>
+        <Pressable
+          style={({ pressed }) =>
+            pressedStyleBuilder(pressed, styles.forgotPasswordButtonPressable)
+          }
+        >
           <Text style={styles.forgotPasswordButton}>Forgot Password?</Text>
         </Pressable>
-        <Pressable style={styles.buttonPressable}>
+        <Pressable
+          style={({ pressed }) =>
+            pressedStyleBuilder(pressed, styles.buttonPressable)
+          }
+        >
           <Text style={styles.buttonText}>SIGN IN</Text>
         </Pressable>
 
-        <Pressable>
+        <Pressable style={({ pressed }) => pressedStyleBuilder(pressed)}>
           <Text style={styles.signUpButton}>New Here? Sign Up</Text>
         </Pressable>
       </View>
       <View style={styles.container}>
-        <Pressable>
+        <Pressable style={({ pressed }) => pressedStyleBuilder(pressed)}>
           <Text style={styles.skipLoginButton}>SKIP LOGIN</Text>
         </Pressable>
       </View>
