@@ -6,7 +6,7 @@ export default StyleSheet.create({
     ...container,
     height: 40,
     width: "100%",
-    backgroundColor: "red",
+
     alignItems: "flex-start",
     paddingHorizontal: 0,
   },

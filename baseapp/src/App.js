@@ -10,6 +10,7 @@ import { View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import { registerRootComponent } from "expo";
 import store from "./utils/redux/store";
+import RegistrationScreen from "./screens/Registration";
 import LoginScreen from "./screens/Login";
 
 const App = () => (
@@ -25,7 +26,8 @@ const App = () => (
           showHideTransition="fade"
           hidden={false}
         />
-        <LoginScreen />
+        {/* <LoginScreen /> */}
+        <RegistrationScreen />
       </View>
     </Provider>
   </>
