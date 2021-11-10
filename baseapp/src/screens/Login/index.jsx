@@ -28,8 +28,8 @@ const LoginScreen = () => {
         <Pressable style={styles.forgotPasswordButtonPressable}>
           <Text style={styles.forgotPasswordButton}>Forgot Password?</Text>
         </Pressable>
-        <Pressable style={styles.signInButtonPressable}>
-          <Text style={styles.signInButtonText}>SIGN IN</Text>
+        <Pressable style={styles.buttonPressable}>
+          <Text style={styles.buttonText}>SIGN IN</Text>
         </Pressable>
 
         <Pressable>
