@@ -1,23 +1,25 @@
-import { ADD_TASK } from './types';
+import { ADD_CATEGORY, ADD_CATEGORIES } from "./types";
 
 const initialState = {
-  tasks: [{ task: 'Sample task', done: true, id: '0' }],
+  categories: [
+    { title: "Electronics", uri: "" },
+    { title: "Cloth", uri: "" },
+  ],
 };
 
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TASK:
+    case ADD_CATEGORY:
       return {
         ...state,
-        tasks: [
-          ...state.tasks,
-          {
-            task: action.payload,
-            done: false,
-            id: Math.random().toString(),
-          },
-        ],
+        categories: [...state.categories, action.payload],
       };
+    case ADD_CATEGORIES:
+      return {
+        ...state,
+        categories: [...state.categories, ...action.payload],
+      };
+
     default:
       return state;
   }
